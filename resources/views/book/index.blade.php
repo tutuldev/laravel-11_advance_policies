@@ -29,14 +29,22 @@ My Book
 
                         <td>
                             <div class="d-flex gap-2">
+                                @can('update',$book)
                                 <a href="{{ route('book.show', $book->id) }}" class="btn btn-primary btn-sm">View</a>
-
                                 <a href="{{ route('book.edit', $book->id) }}" class="btn btn-warning btn-sm">Update</a>
+                                @else
+                                <h6>Not Authorize</h6>
+                                @endcan
+
+                                @can('delete',$book)
                                 <form action="{{ route('book.destroy', $book->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method("DELETE")
                                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
+                                @endcan
+
+
 
                             </div>
                         </td>
