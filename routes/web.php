@@ -8,7 +8,6 @@ Route::get('/', function () {
     return view('login');
 })->name('login');
 
-Route::resource('/book',BookController::class)->middleware('auth');
 
 
 // for registion
@@ -19,4 +18,15 @@ Route::post('/login', [UserController::class, 'loginMatch'])->name('loginMatch')
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 // Route::get('/books', [BookController::class, 'index'])->name('book.show');
+
+Route::resource('/book',BookController::class)->middleware('auth');
+
+// policy with route method 1
+// Route::put('book/{id}',[BookController::class,'update'])
+// ->middleware('can:update,delete');
+
+// policy with route method 2
+// Route::put('book/{id}',[BookController::class,'update'])
+// ->can('update,delete');
+
 
