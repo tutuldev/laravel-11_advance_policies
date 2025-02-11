@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
@@ -52,8 +53,8 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-
-        // return $book;
+        // using policy
+        Gate::authorize('view',$book);
         return view('book.viewbook',compact('book'));
     }
 
@@ -71,6 +72,8 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+          // using policy
+          Gate::authorize('update',$book);
         $request->validate([
             'title' => 'required|string',
             'price' => 'required|numeric',
@@ -95,6 +98,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        // using policy
+        Gate::authorize('delete',$book);
         // $books=Book::find($book);
         $book->delete();
         return redirect()->route('book.index')

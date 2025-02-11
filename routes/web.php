@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('login');
 })->name('login');
 
-Route::resource('/book',BookController::class);
+Route::resource('/book',BookController::class)->middleware('auth');
 
 
 // for registion
