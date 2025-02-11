@@ -72,8 +72,12 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-          // using policy
-          Gate::authorize('update',$book);
+          // using policy 1
+          //   Gate::authorize('update',$book);
+          // using policy method 2 if method
+          if($request->user()->cannot('update',$book)){
+            abort(403);
+          }
         $request->validate([
             'title' => 'required|string',
             'price' => 'required|numeric',
