@@ -65,4 +65,12 @@ class BookPolicy
     {
         return false;
     }
+    // make own policy method
+    // public function before(User $user): bool|null
+    // {
+    //     if($user->isAdministrator()){
+    //         return true;
+    //     }
+    //     return null;
+    // }
 }
