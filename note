@@ -1,0 +1,6 @@
+INSERT INTO books (title, user_id, price, created_at, updated_at) VALUES
+('Book One', 1, 300,NOW(), NOW()),
+('Book Two', 1, 200, NOW(), NOW()),
+('Book Three', 2, 320, NOW(), NOW());
+
+
