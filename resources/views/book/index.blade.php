@@ -26,15 +26,32 @@ My Book
                     <td class="px-5">{{$book->price}}</td>
                     <td class="px-5">{{$book->user->name}}</td>
 
-
                         <td>
+                            {{-- @if (Auth::user()->can('update',$book))
+                             Hello
+                             @endif --}}
+                             {{-- it is op off if  --}}
+                             @unless (Auth::user()->can('update',$book))
+                             Hello
+                             @endunless
+
                             <div class="d-flex gap-2">
-                                @can('update',$book)
+                                {{-- @can('update',$book)
                                 <a href="{{ route('book.show', $book->id) }}" class="btn btn-primary btn-sm">View</a>
                                 <a href="{{ route('book.edit', $book->id) }}" class="btn btn-warning btn-sm">Update</a>
                                 @else
                                 <h6>Not Authorize</h6>
-                                @endcan
+                                @endcan --}}
+
+                                {{-- check multiple condiction  with array--}}
+                                {{-- update and view if acces only one then not show  --}}
+                                @canany(['update','view'],$book)
+                                <a href="{{ route('book.show', $book->id) }}" class="btn btn-primary btn-sm">View</a>
+                                <a href="{{ route('book.edit', $book->id) }}" class="btn btn-warning btn-sm">Update</a>
+                                @else
+                                <h6>Not Authorize</h6>
+                                @endcanany
+
 
                                 @can('delete',$book)
                                 <form action="{{ route('book.destroy', $book->id) }}" method="POST" class="d-inline">
